@@ -1,0 +1,20 @@
+.Map-Menu-Container{
+  display: flex;
+  flex-direction: column;
+  max-width: 95vw;
+   align-items: center;
+   background-color:#fafafa;
+  h1{
+    padding-top: 20em;
+    margin-top: 10em;
+  }
+
+  }
+.Map-Menu-Wrapper{
+    display: flex;
+    flex-direction: row;
+  
+
+    padding-top: 5em;
+    gap:5em;
+  }
