@@ -11,8 +11,8 @@ from atproto import Client
 disaster_keywords = ["earthquake", "flood", "hurricane", "fire", "tsunami", "tornado", "disaster", "emergency"]
 
 # Connect to MongoDB
-client_mongo = MongoClient("mongodb+srv://Twitterdb:CS4485.0W1@cluster0.toqut.mongodb.net/")
-#mongodb+srv://Twitterdb:CS4485.0W1@cluster0.toqut.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+client_mongo = MongoClient("mongodb+srv://Twitterdb:<password>@cluster0.toqut.mongodb.net/")
+
 database = client_mongo["bluesky_db"]
 collection = database["disaster_feed"]
 
