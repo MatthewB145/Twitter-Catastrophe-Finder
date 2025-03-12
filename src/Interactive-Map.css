@@ -1,0 +1,36 @@
+.Map-Menu-Container{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 0em;
+  padding: 5em;
+  padding-top: 0em;
+  max-width: fit-content;
+  background-color:#F5F5F5;
+  h1{
+    padding-top: 20em;
+    margin-top: 10em;
+    
+  }
+
+  }
+.Map-Menu-Wrapper{
+    display: flex;
+    flex-direction: row;
+  
+
+    padding-top:1em;
+    gap:0em;
+  }
+
+.Map-Graph-Contain{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-top: 4em;
+  
+}
+  .title{
+    align-items: center;
+    justify-content: left;
+  }

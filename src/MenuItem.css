@@ -1,0 +1,97 @@
+.menuitem {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-style: solid;
+    border: none;
+    background-color: white;
+    align-items: left;
+    font-size: 1rem;
+    min-width: 25em;
+    max-width: 25em;
+    p{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        font-size: 1.2;
+    }
+    img{
+        max-height: auto;
+        justify-content: flex-end;
+        align-items: left;
+    }
+    h3{
+        color: #001E69;
+        font-weight: 600;
+    }
+
+
+}
+
+.menuitem:hover {
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2); /* Adds shadow effect */
+}
+.tweet-location-date{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    p{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding: none;
+        font-size: 1rem;
+    }
+    
+}
+.tweet-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+
+.menuitem.minor{
+    border-color: #EAEA61;
+}
+.menuitem.major{
+    border-color:#FBCCCC ;
+}
+.menuitem.popup{
+    text-align: left;
+    gap:0em;
+    
+    min-width: 0em;
+    max-height: fit-content;
+    min-height: 0em;
+    padding: 0.5em;
+    padding-bottom: 0.5em;
+
+    font-size: 0.7rem;
+    p{
+        font-size: 0.9rem;
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+    img{
+        max-height: 3em;
+        justify-content: flex-end;
+        align-items: left;
+    }
+
+}
+button{
+    border: none;
+    background: none;
+}
+
+
+
+
+
+
+li
+{
+  list-style: none;  
+}
