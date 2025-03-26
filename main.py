@@ -76,19 +76,7 @@ def load_from_json(filename):
 
 # Bluesky Post Fetching Function
 def fetch_disaster_related_posts(username, password, search_terms=None, days_back=7):
-    """
-    Fetch disaster-related posts from Bluesky using AT Protocol
 
-    Args:
-        username (str): Bluesky account username
-        password (str): Bluesky account password
-        search_terms (list, optional): List of disaster-related search terms.
-                                       Defaults to a predefined list if None.
-        days_back (int, optional): Number of days to look back. Defaults to 7.
-
-    Returns:
-        list: A list of disaster-related posts
-    """
     # Default search terms if not provided
     if search_terms is None:
         search_terms = [
@@ -99,8 +87,7 @@ def fetch_disaster_related_posts(username, password, search_terms=None, days_bac
             "flood",
             "wildfire",
             "tornado",
-            "tsunami",
-            "crisis"
+            "tsunami"
         ]
 
     try:
@@ -114,24 +101,31 @@ def fetch_disaster_related_posts(username, password, search_terms=None, days_bac
 
         # Collect posts
         disaster_posts = []
-
+        feed_uris = [
+            'at://did:plc:qiknc4t5rq7yngvz7g4aezq7/app.bsky.feed.generator/aaaejsyozb6iq', #Fire
+            'at://did:plc:qiknc4t5rq7yngvz7g4aezq7/app.bsky.feed.generator/aaaejwgffwqky', #Hurricane
+            'at://did:plc:qiknc4t5rq7yngvz7g4aezq7/app.bsky.feed.generator/aaaejxlobe474', #Earthquake
+            'at://did:plc:qiknc4t5rq7yngvz7g4aezq7/app.bsky.feed.generator/aaaejy45orees', #Tornado
+            'at://did:plc:qiknc4t5rq7yngvz7g4aezq7/app.bsky.feed.generator/aaaejqjms3noe' #Flood
+        ]
         # Fetch posts from the user's feed
-        feed = client.get_timeline(limit=100)
+        for uri in feed_uris:
+            feed = client.app.bsky.feed.get_feed({'feed': uri, 'limit': 10})
 
-        # Process posts
-        for post in feed.feed:
-            # Check if post contains any disaster-related terms
-            post_text = post.post.record.text.lower()
+            # Process posts
+            for post in feed.feed:
+                # Check if post contains any disaster-related terms
+                post_text = post.post.record.text.lower()
 
-            # Check if any search term is in the post
-            if 1==1:
-                processed_post = {
-                    'text': post.post.record.text,
-                    'created_at': post.post.record.created_at,
-                    'author': post.post.author.handle,
-                    'uri': post.post.uri
-                }
-                disaster_posts.append(processed_post)
+                # Check if any search term is in the post
+                if any(term.lower() in post_text for term in search_terms):
+                    processed_post = {
+                        'text': post.post.record.text,
+                        'created_at': post.post.record.created_at,
+                        'author': post.post.author.handle,
+                        'uri': post.post.uri
+                    }
+                    disaster_posts.append(processed_post)
 
         return disaster_posts
 
@@ -197,13 +191,6 @@ def main():
     # Make predictions
     predictions = multi_target_classifier.predict(X_test_vectorized)
 
-    # Print classification reports
-    print("Target (Disaster/Non-disaster) Classification Report:")
-    print(classification_report(y_test[:, 0], predictions[:, 0]))
-
-    print("\nDisaster Type Classification Report:")
-    print(classification_report(y_test[:, 1], predictions[:, 1]))
-
     # Function to make predictions on new text
     def predict_disaster(text):
         try:
@@ -223,38 +210,25 @@ def main():
             print(f"Error in prediction: {e}")
             return "Unknown", "Unknown"
 
-    # Print unique disaster types for verification
-    print("\nUnique disaster types in training data:")
-    print(le_disaster.classes_)
 
-    # Fetch disaster-related posts from Bluesky
-    bluesky_username = "matthewb145.bsky.social"  # Replace with actual username
-    bluesky_password = "Familypets4"  # Replace with actual password
+
+    bluesky_username = "matthewb145.bsky.social"
+    bluesky_password = "Familypets4"
 
     disaster_posts = fetch_disaster_related_posts(
         bluesky_username,
         bluesky_password,
-        days_back=3  # Look back 3 days
+        days_back=3
     )
-
-    #Save fetched posts to MongoDB
-    if mongo_client:
-        save_to_mongodb(mongo_client, 'bluesky_db', 'Test', disaster_posts)
 
     # Predict disaster type for fetched posts
     bluesky_results = {
-        'predictions': [],
-        'posts': disaster_posts
+        'predictions': []
     }
 
-    print("\nPredictions for Bluesky posts:")
     for post in disaster_posts:
         is_disaster, disaster_type = predict_disaster(post['text'])
-        print(f"\nPost by {post['author']}: {post['text']}")
-        print(f"Prediction: {is_disaster}")
-        print(f"Disaster Type: {disaster_type}")
 
-        # Store results
         result = {
             'text': post['text'],
             'author': post['author'],
@@ -264,48 +238,8 @@ def main():
         }
         bluesky_results['predictions'].append(result)
 
-    # Save Bluesky results to JSON
     save_to_json(bluesky_results, 'bluesky_prediction_results.json')
-'''
-    # Example usage with sample texts (kept from previous version)
-    sample_texts = [
-        "A huge forest fire has broken out in California",
-        "I love the way the sun sets in the evening",
-        "Earthquake magnitude 7.2 hits Japan coast"
-    ]
-
-    # Prepare results for saving
-    results = {
-        'predictions': [],
-        'sample_texts': sample_texts
-    }
-
-    print("\nPredictions for sample texts:")
-    for text in sample_texts:
-        is_disaster, disaster_type = predict_disaster(text)
-        print(f"\nText: {text}")
-        print(f"Prediction: {is_disaster}")
-        print(f"Disaster Type: {disaster_type}")
-
-        # Store results
-        result = {
-            'text': text,
-            'is_disaster': is_disaster,
-            'disaster_type': disaster_type
-        }
-        results['predictions'].append(result)
-
-    # Save results to MongoDB
-    if mongo_client:
-        save_to_mongodb(mongo_client, 'bluesky_db', 'Cleaned_Data', results)
-
-    # Save results to JSON
-    save_to_json(results, 'prediction_results.json')
-
-    # Print final results
-    print("\nFinal Prediction Results:")
-    print(json.dumps(results, indent=2))
-'''
-
+    if mongo_client: save_to_mongodb(mongo_client, 'bluesky_db', 'Cleaned_Data', bluesky_results)
 if __name__ == "__main__":
     main()
+
