@@ -1,0 +1,14 @@
+.disaster-alert{
+    background-color: white;
+    border: 1px solid #001E69;
+    border-radius: 1em;
+    padding: 0.5em 0.5em 0.5em 1em;
+
+    h3{
+        color: #001E69;
+    }
+    p{
+        font-size: large;
+    }
+  
+}

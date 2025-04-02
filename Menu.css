@@ -2,26 +2,22 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
-  max-width: 20em;
   align-items: left;  
    padding-bottom: 2rem;
 
    padding-right: 3rem;
    border-radius: 2rem;
-   .title{
-    color: black;
-    max-height: 80em;
    
-}
 
-.title{
-    margin-left: 2em;
-}
+
    ul{
     display: flex;
     flex-direction: column;
     gap: 1em;
     padding: 0 0 0 0;
+    overflow: auto;
+    
+    max-height:65em;
    } 
 }
 

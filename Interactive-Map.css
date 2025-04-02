@@ -1,13 +1,21 @@
 .Map-Menu-Container{
   display: flex;
   flex-direction: column;
-  max-width: 95vw;
-   align-items: center;
-   background-color:#fafafa;
+  margin: auto;
+  margin-top: 0em;
+  padding: 5em;
+  padding-top: 0em;
+  max-width: fit-content;
+  background-color:#F5F5F5;
   h1{
-    padding-top: 20em;
-    margin-top: 10em;
-  }
+    margin-left: 0em;
+    margin-top: 0em;
+    padding: 0em;
+    font-size:1.8rem ;
+    color: #001E69;
+    font-weight: 500;
+
+}
 
   }
 .Map-Menu-Wrapper{
@@ -15,14 +23,19 @@
     flex-direction: row;
   
 
-    padding-top: 5em;
-    gap:5em;
+    padding-top:1em;
+    gap:0em;
+
   }
-  
-.Map-Graph-Container {
+
+.Map-Graph-Contain{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 70%; 
+  gap: 2em;
+  margin-top: 1em;
+  
 }
-
+  .title{
+    align-items: center;
+    justify-content: left;
+  }

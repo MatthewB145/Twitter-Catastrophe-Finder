@@ -1,0 +1,23 @@
+.statcard{
+    display: flex;
+    gap: 0.2em;
+    flex-direction: column;
+    background-color: white;
+    min-width: 10em;
+    min-height: 8em;
+    /*max-width: 4em;*/
+    padding: 0.6em 2em 0.6em 2em;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
+    h3{
+        margin: 0em;
+        color: #001E69;
+        font-weight: 600;
+    }
+    p{
+        margin: 0em;
+    
+    }
+    
+    
+}
