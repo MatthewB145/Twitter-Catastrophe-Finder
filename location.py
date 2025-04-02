@@ -53,9 +53,9 @@ def main(*texts):
 
 # Change this to read from BlueSky Text Thread
 
-# Read data from file
+# Read data
 with open("data.txt", "r", encoding="utf-8") as file:
     #lines = [line.strip() for line in file.readlines() if line.strip()]  # Remove empty lines
     lines = file.read().splitlines()
-# Call main function with the read data
+
 main(*lines)
