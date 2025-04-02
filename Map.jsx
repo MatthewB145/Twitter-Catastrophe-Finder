@@ -8,7 +8,8 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import {Icon, divIcon} from "leaflet"
 import { DISASTERS } from "./data";
 import MenuItem from "./MenuItem";
-export default function Menu() {
+
+export default function Map({Disasters}) {
     const mapRef = useRef(null);
     let [latitude, setLatitude] = useState(35.0078);
     let [longitude, setLongitude] = useState(97.0929);
@@ -21,8 +22,6 @@ export default function Menu() {
     const custumIcon = new Icon({
         iconUrl: "location-pin.png",iconSize: [38,38]
     });
-
-
 
     useEffect(()=> {
       function success(pos) {
@@ -45,17 +44,18 @@ export default function Menu() {
     },[]);
 
     if (!isLoaded) {
-        return <div>Loading...</div>; // Show a loading message while waiting for geolocation data
+        return <div>Waiting For Your Location...</div>; // Show a loading message while waiting for geolocation data
     }
     
     return(
-        <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} style={{height: "1000px", width: "1000px"}}>
+        <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} style={{height: "750px", width: "1000px"}}>
+            
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <MarkerClusterGroup>
-            {DISASTERS.map((disaster,index) => (    
+            {Disasters.map((disaster,index) => (    
                 
                 <Marker key ={index} position = {[disaster.latitude,disaster.longitude]} icon ={custumIcon}>
                     <Popup> <MenuItem name = {disaster.name} 
