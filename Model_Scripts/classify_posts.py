@@ -9,9 +9,14 @@ import certifi
 from atproto import Client
 from geopy.geocoders import Nominatim
 from pymongo import MongoClient
-
+from dotenv import load_dotenv
+import os
 context = ssl.create_default_context(cafile=certifi.where())
+load_dotenv()
 
+USERNAME = os.getenv('BLUESKY_USERNAME')
+PASSWORD = os.getenv('BLUESKY_PASSWORD')
+MONGODB_URI = os.getenv('MONGODB_URI')
 def preprocess_text(text):
     if not text:
         return ""
@@ -94,8 +99,8 @@ def main():
         disaster_type = label_encoder.inverse_transform([int(prediction[1])])[0]
         return is_disaster, disaster_type
 
-    username = "matthewb145.bsky.social"
-    password = "Familypets4"
+    username = USERNAME
+    password = PASSWORD
     posts = fetch_disaster_related_posts(username, password, days_back=3)
 
     results = {'predictions': []}
@@ -124,7 +129,7 @@ def main():
 
     # Save to MongoDB
     try:
-        mongo_client = MongoClient("mongodb+srv://Twitterdb:CS4485.0W1@cluster0.toqut.mongodb.net/")
+        mongo_client = MongoClient(MONGODB_URI)
         save_to_mongodb(mongo_client, results)
     except Exception as e:
         print("MongoDB connection error.")
