@@ -15,6 +15,41 @@ import os
 from atproto import Client, models
 from datetime import datetime, timedelta
 from sklearn.svm import SVC
+import re
+from geopy.geocoders import Nominatim
+import ssl
+import certifi
+context = ssl.create_default_context(cafile=certifi.where())
+
+
+
+def load_names(filename):
+   with open(filename, 'r', encoding='utf-8') as file:
+        cities = {line.strip().lower() for line in file if line.strip()}
+        return cities
+
+def extract_location(text, filename = 'Final_List.txt'):
+    cities = load_names(filename)
+    text_lower = text.lower()
+    found_cities = []
+
+    for city in cities:
+        #match whole words only
+        if re.search(r'\b' + re.escape(city) + r'\b', text_lower):
+            found_cities.append(city)
+    found_cities = [city for city in cities if city in text_lower]
+    return found_cities
+
+
+
+def get_coordinates(city_name):
+    geolocator = Nominatim(user_agent = "city_coordinates_extractor", ssl_context=context)
+    location = geolocator.geocode(city_name, timeout = 30)
+    if location:
+        return location.latitude, location.longitude
+    else:
+        return None
+
 
 # MongoDB Connection Functions
 def get_mongodb_connection(connection_string):
@@ -228,13 +263,21 @@ def main():
 
     for post in disaster_posts:
         is_disaster, disaster_type = predict_disaster(post['text'])
+        found_cities = extract_location(post['text'])
+        locations = []
 
+        if found_cities:
+            coordinates = get_coordinates(found_cities[0].title())  # Capitalizing city name
+            if coordinates:
+                locations.append({'city': found_cities[0].title(), 'latitude': coordinates[0], 'longitude': coordinates[1]})
         result = {
-            'text': post['text'],
-            'author': post['author'],
-            'created_at': post['created_at'],
-            'is_disaster': is_disaster,
-            'disaster_type': disaster_type
+            'name': disaster_type,
+            'location': locations[0]['city'] if locations else '',
+            'latitude': locations[0]['latitude'] if locations else '',
+            'longitude': locations[0]['longitude'] if locations else '',
+            'report': post['text'],
+            'disaster_level': is_disaster,
+            'date': datetime.fromisoformat(post['created_at'].replace("Z", "")).date().isoformat()
         }
         bluesky_results['predictions'].append(result)
 
