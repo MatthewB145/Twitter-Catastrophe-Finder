@@ -9,8 +9,7 @@ function App() {
 
   // Fetch the disaster data on component mount
   useEffect(() => {
-    const apiUrl = 'http://localhost:3001/getData'; // Replace with your API URL
-
+    const apiUrl =import.meta.env.VITE_SERVER; 
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
