@@ -61,4 +61,4 @@ jobs:
           app-name: 'BlueskyServer'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9D80433714744C3DAB3BD37CBDAA0799 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DEAE2D86A2084F4E9FDD00B709145593 }}
