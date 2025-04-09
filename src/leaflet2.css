@@ -1,0 +1,18 @@
+.leaflet-popup-content-wrapper{
+    background: none;
+    color: none;
+    box-shadow: none;
+}
+.leaflet-popup-content {
+    display: flex;
+    margin: 0;
+    line-height: 1.3;
+    font-size: 13px;
+    font-size: 1.08333em;
+    min-height: 1px;
+}
+element.style{
+    width: 100vh;
+    height:100vh
+}
+

@@ -1,0 +1,41 @@
+.Map-Menu-Container{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 0em;
+  padding: 5em;
+  padding-top: 0em;
+  max-width: fit-content;
+  background-color:#F5F5F5;
+  h1{
+    margin-left: 0em;
+    margin-top: 0em;
+    padding: 0em;
+    font-size:1.8rem ;
+    color: #001E69;
+    font-weight: 500;
+
+}
+
+  }
+.Map-Menu-Wrapper{
+    display: flex;
+    flex-direction: row;
+  
+
+    padding-top:1em;
+    gap:0em;
+
+  }
+
+.Map-Graph-Contain{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-top: 1em;
+  
+}
+  .title{
+    align-items: center;
+    justify-content: left;
+  }

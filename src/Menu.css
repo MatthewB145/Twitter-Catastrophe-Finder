@@ -1,0 +1,40 @@
+.menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;  
+   padding-bottom: 2rem;
+
+   padding-right: 3rem;
+   border-radius: 2rem;
+   
+
+
+   ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0 0 0 0;
+    overflow: auto;
+    
+    max-height:65em;
+   } 
+}
+
+.prev-next{
+
+    display: flex;
+    flex-direction:rows;
+    gap:3em;
+
+    right:0;
+    padding: 0em;
+    margin-bottom: 1em;
+  }
+  .arrowbutton{
+    background-color: transparent;
+    border: none;
+  }
+  .arrowbutton :hover{
+    cursor: pointer;
+  }

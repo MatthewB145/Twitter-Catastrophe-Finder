@@ -1,0 +1,34 @@
+.selection-menu{
+    margin: 0em 0em 0em 0em;
+
+    display: flex;
+    flex-direction: row;
+    h3{
+        margin:0em;
+        padding: 1em 0em 1em 0em;
+        
+    }
+
+    ul{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 0em;
+        margin: 0em;
+        margin-left: 1em;
+        
+    }
+}
+.item{
+    min-width: 4em;
+    max-width: 4em;
+}
+
+
+.filter-item{
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    gap:1em
+}
+
