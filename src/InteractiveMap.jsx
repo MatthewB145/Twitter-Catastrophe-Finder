@@ -30,7 +30,7 @@ export default function InteractiveMap({disasterData}) {
         
         <div className='Map-Menu-Container'>
             <h1 className="heading">Disaster Alerts & Reports</h1>
-           <StatDash data = {disasterData}></StatDash>
+           <StatDash data = {filteredData}></StatDash>
            <SelectionMenu selectedDisasters={selectedDisasters} onFilterChange={handleFilterChange}></SelectionMenu>
             <div className='Map-Menu-Wrapper'>
                 <Menu disasters = {filteredData}/>
