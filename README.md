@@ -4,7 +4,7 @@ Project Team:
 Matthew Bierie - Team Lead
 Gerardo Rios - Scrum Master
 Elizaveta Filonova - Software Engineer
-Faizan-Ali Lalni - Data Engineer
+Faizan-Ali Lalani - Data Engineer
 
 Project Overview:
 The Twitter Catastrophe Finder aims to detect emerging crisis situations using real-time Twitter data. By leveraging the Tweepy library for data collection, Scikit-learn for machine learning-based classification, and Flask for a user-friendly web dashboard, this project will help first responders and analysts identify potential disasters as they unfold.
