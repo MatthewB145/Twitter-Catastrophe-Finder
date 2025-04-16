@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import "./SelectionMenu.css"
 
 export default function SelectionMenu({selectedDisasters,onFilterChange}) {
-    const disasterTypes = ["earthquake", "fire", "flood", "hurricane","tornado"];
+    const disasterTypes = ["earthquake", "fire", "flood", "Hurricane","Tornado"];
     
 
     return(
