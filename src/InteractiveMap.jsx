@@ -32,15 +32,15 @@ export default function InteractiveMap({disasterData}) {
            <StatDash data = {filteredData}></StatDash>
            <SelectionMenu selectedDisasters={selectedDisasters} onFilterChange={handleFilterChange}></SelectionMenu>
             <div className='Map-Menu-Wrapper'>
+            
                 <Menu disasters = {filteredData}/>
                 <div className="Map-Graph-Contain">
                     <Map Disasters ={pins}/>
-                    <SignificantEvent data = {filteredData}></SignificantEvent>
                     <Graph data = {disasterData}></Graph>
                 </div>
                 
-                
             </div>
+            <SignificantEvent data = {filteredData}></SignificantEvent>
         </div>
     );
 }
