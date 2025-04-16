@@ -1,6 +1,6 @@
 import React, {useEffect, useRef,useState} from "react";
 import {MapContainer, Marker,Popup, TileLayer} from "react-leaflet";
-
+import HeatmapLayer from './HeatmapLayer'; 
 import "leaflet/dist/leaflet.css";
 import "./leaflet2.css"
 import 'react-leaflet-markercluster/styles'
@@ -47,6 +47,8 @@ export default function Map({Disasters}) {
         return <div>Waiting For Your Location...</div>; // Show a loading message while waiting for geolocation data
     }
     
+    const points = Disasters.map((d) => [d.latitude, d.longitude]); // 0.5 = intensity (0–1)
+
     return(
         <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} style={{height: "750px", width: "1000px"}}>
             
@@ -54,6 +56,8 @@ export default function Map({Disasters}) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
+            <HeatmapLayer points={points} />
             <MarkerClusterGroup>
             {Disasters.map((disaster,index) => (    
                 
