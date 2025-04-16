@@ -29,10 +29,10 @@ export default function InteractiveMap({disasterData}) {
         
         <div className='Map-Menu-Container'>
             <h1 className="heading">Disaster Alerts & Reports</h1>
-           <StatDash data = {pins}></StatDash>
+           <StatDash data = {filteredData}></StatDash>
            <SelectionMenu selectedDisasters={selectedDisasters} onFilterChange={handleFilterChange}></SelectionMenu>
             <div className='Map-Menu-Wrapper'>
-                <Menu disasters = {pins}/>
+                <Menu disasters = {filteredData}/>
                 <div className="Map-Graph-Contain">
                     <Map Disasters ={pins}/>
                     <SignificantEvent data = {disasterData}></SignificantEvent>
