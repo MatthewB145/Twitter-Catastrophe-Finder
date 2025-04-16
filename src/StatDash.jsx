@@ -3,7 +3,7 @@ import "./StatDash.css"
 
 export default function StatDash({data})
 {
-    const disasters =["Earthquake","Fire","Flood","Hurricane","Tornado"]
+    const disasters =["earthquake","fire","flood","hurricane","tornado"]
     
     return(
         <div className="statdash" > 
