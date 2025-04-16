@@ -50,7 +50,7 @@ export default function Map({Disasters}) {
     const points = Disasters.map((d) => [d.latitude, d.longitude]); // 0.5 = intensity (0–1)
 
     return(
-        <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} style={{height: "500px", width: "1000px"}}>
+        <MapContainer center={[latitude, longitude]} zoom={5} ref={mapRef} style={{height: "500px", width: "1000px"}}>
             
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
