@@ -11,6 +11,7 @@ mongoose.connect(process.env.DATABASE_URL)
     .catch(err => console.log("Database connection error: ", err));
 
 const dataSchema = mongoose.Schema({
+    _id: Number,
     name: String,
     location: String,
     latitude: Number,
@@ -20,7 +21,7 @@ const dataSchema = mongoose.Schema({
     date: Date
 });
 
-const dataModel = mongoose.model("finalized-posts", dataSchema);
+const dataModel = mongoose.model("Classified_Data", dataSchema, "Classified_Data");
 
 app.get("/getData", async (req, res) => {
     const Data = await dataModel.find();
