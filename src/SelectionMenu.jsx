@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import "./SelectionMenu.css"
 
 export default function SelectionMenu({selectedDisasters,onFilterChange}) {
-    const disasterTypes = ["Earthquake", "Fire", "Flood", "Hurricane","Tornado"];
+    const disasterTypes = ["earthquake", "fire", "flood", "hurricane","tornado"];
     
 
     return(
@@ -14,7 +14,7 @@ export default function SelectionMenu({selectedDisasters,onFilterChange}) {
                { disasterTypes.map((type)=> (
                     <div className = "filter-item">
                         <input type = "checkbox" checked ={selectedDisasters.includes(type)} onChange={()=> onFilterChange(type)} value="Submit"></input>   
-                        <p>{type}</p>
+                        <p>{type.charAt(0).toUpperCase() + type.slice(1)}</p>
                         
                        
                     </div>
