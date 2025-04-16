@@ -10,7 +10,7 @@ import { DISASTERS } from "./data";
 import SignificantEvent from "./SignificantEvent";
 
 export default function InteractiveMap({disasterData}) {
-    const [selectedDisasters, setSelectedDisasters] = useState(["earthquake", "fire", "flood", "hurricane","tornado"]);
+    const [selectedDisasters, setSelectedDisasters] = useState(["earthquake", "fire", "flood", "Hurricane","Tornado"]);
 
     const handleFilterChange = (disasterType) => {
         setSelectedDisasters((prev) =>
