@@ -1,56 +1,53 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Cell, Text } from "recharts";
+import { LineChart, Legend, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Line} from "recharts";
 import "./graph.css"; // Import CSS file
 
-const data = [
-  { name: "Fire", value: 1020, color: "#1E5BFF" },
-  { name: "Earthquake", value: 984, color: "#FF7F24" },
-  { name: "Hurricane", value: 759, color: "#8A2BE2" },
-  { name: "Tsunami", value: 1306, color: "#3D0C18" },
-  { name: "Tornado", value: 834, color: "#B33A2B" }
-];
 
-const CustomLabel = ({ x, y, value
+export default function Graph({data}){
+  const disasterData = data;
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth();
+  const todayDate = today.getDate();
 
- }) => {
-  return (
-    <Text x={x + 25} y={y - 10} fill="#000" textAnchor="middle" fontSize={14} fontWeight="bold">
-      {value}
-    </Text>
-  );
-};
+  const todaysData = disasterData.filter((report) => {
+    const reportDate = new Date(report.date);
+    return(
+      reportDate.getFullYear() === todayYear &&
+      reportDate.getMonth() === todayMonth &&
+      reportDate.getDate() === todayDate
+    )
+  })
 
-const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="custom-tooltip">
-        <p>{`${payload[0].name}: ${payload[0].value}`}</p>
-      </div>
-    );
-  }
-  return null;
-};
 
-const Graph = () => {
+  const hourCounts = todaysData.reduce((acc, report) => {
+    const date = new Date(report.date);
+    const hour = date.getHours();
+      const hourKey = `${hour.toString().padStart(2, "0")}:00`;
+      acc[hourKey] = (acc[hourKey] || 0) + 1;
+      return acc;
+    }, {});
+
+    const fullDayData = Array.from({ length: 24 }, (_, i) => {
+      const hour = `${i.toString().padStart(2, "0")}:00`;
+      return {
+        hour,
+        count: hourCounts[hour] || 0
+      };
+    });
   return (
     <div className="graph-container">
-      <h2 className="graph-title">Disaster Reports</h2>
+      <h2 className="graph-title">Today's Disaster Reports by Hour</h2>
       <ResponsiveContainer width="100%" height={400}>
-        <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+        <LineChart data={fullDayData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="value" barSize={50} label={<CustomLabel />}>
-          
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-          </Bar>
-        </BarChart>
+          <XAxis dataKey="hour" label={{ value: "Hour of the Day", position: "insideBottomLeft", offset: -10}} />
+          <YAxis label={{value: "Number of Reports", position: 'insideLeft', angle: -90}} />
+          <Tooltip  />
+          <Legend />
+          <Line type="monotone" dataKey="count" stroke="#000000" strokeWidth={2} dot = {{r: 4 }}/>
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );
 };
-
-export default Graph;
