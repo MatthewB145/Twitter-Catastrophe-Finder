@@ -10,7 +10,7 @@ import { DISASTERS } from "./data";
 import SignificantEvent from "./SignificantEvent";
 
 export default function InteractiveMap({disasterData}) {
-    const [selectedDisasters, setSelectedDisasters] = useState(["Earthquake", "Fire", "Flood", "Hurricane","Tornado"]);
+    const [selectedDisasters, setSelectedDisasters] = useState(["earthquake", "fire", "flood", "hurricane","tornado"]);
 
     const handleFilterChange = (disasterType) => {
         setSelectedDisasters((prev) =>
@@ -21,21 +21,20 @@ export default function InteractiveMap({disasterData}) {
         
     };
     
-    const filteredData= selectedDisasters.length
-    ? disasterData.filter((disaster) => selectedDisasters.includes(disaster.name))
-    : DISASTERS;
+    const filteredData= selectedDisasters.length? disasterData.filter((disaster) => selectedDisasters.includes(disaster.name)): disasterData;
+    const pins = filteredData.filter((item) => item.location !== "");
 
     return(
         
         
         <div className='Map-Menu-Container'>
             <h1 className="heading">Disaster Alerts & Reports</h1>
-           <StatDash data = {filteredData}></StatDash>
+           <StatDash data = {pins}></StatDash>
            <SelectionMenu selectedDisasters={selectedDisasters} onFilterChange={handleFilterChange}></SelectionMenu>
             <div className='Map-Menu-Wrapper'>
-                <Menu disasters = {filteredData}/>
+                <Menu disasters = {pins}/>
                 <div className="Map-Graph-Contain">
-                    <Map Disasters ={filteredData}/>
+                    <Map Disasters ={pins}/>
                     <SignificantEvent data = {disasterData}></SignificantEvent>
                 </div>
                 
