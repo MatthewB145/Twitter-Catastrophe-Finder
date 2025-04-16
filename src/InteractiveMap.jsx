@@ -36,6 +36,7 @@ export default function InteractiveMap({disasterData}) {
                 <div className="Map-Graph-Contain">
                     <Map Disasters ={pins}/>
                     <SignificantEvent data = {disasterData}></SignificantEvent>
+                    <Graph data = {disasterData}></Graph>
                 </div>
                 
                 
