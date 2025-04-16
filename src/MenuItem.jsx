@@ -6,7 +6,7 @@ export default function MenuItem({name,location,report,date,level,class1})
     class2 = class2+" "+class1;
     return(
         <div className= {class2}> 
-            <h3 >{name}</h3>
+            <h3 >{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
             <p>{report}</p>
 
             <div className = "tweet-info">
@@ -15,7 +15,7 @@ export default function MenuItem({name,location,report,date,level,class1})
                     <p>{location} <br></br>{new Date(date).toDateString()}</p>
                     <p>{} </p>
                 </div>
-                <button><img src = "locationpin.png" alt ="location pin logo"></img></button>
+                {location ? <button><img src="locationpin.png" alt="location pin logo" /></button> : null}
             </div>
         </div>
     );
