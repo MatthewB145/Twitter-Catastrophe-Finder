@@ -35,9 +35,13 @@ function App() {
     return <div>Error: {error}</div>;
   }
 
+  const final_disasters = disasters.filter(item => item.disaster_level === "Disaster");
+  console.log("filtered:");
+  console.log(final_disasters);
+
   return (
     <>
-      <InteractiveMap disasterData={disasters}/>
+      <InteractiveMap disasterData={final_disasters}/>
     </>   
   )
 }
