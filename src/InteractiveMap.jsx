@@ -8,6 +8,7 @@ import StatDash from "./StatDash";
 import SelectionMenu from "./SelectionMenu";
 import { DISASTERS } from "./data";
 import SignificantEvent from "./SignificantEvent";
+import Footer from "./Footer";
 
 export default function InteractiveMap({disasterData}) {
     const [selectedDisasters, setSelectedDisasters] = useState(["earthquake", "fire", "flood", "Hurricane","Tornado"]);
@@ -26,7 +27,7 @@ export default function InteractiveMap({disasterData}) {
 
     return(
         
-        
+       <div className="content-wrapper">
         <div className='Map-Menu-Container'>
             <h1 className="heading">Disaster Alerts & Reports</h1>
            <StatDash data = {filteredData}></StatDash>
@@ -42,5 +43,7 @@ export default function InteractiveMap({disasterData}) {
             </div>
             <SignificantEvent data = {filteredData}></SignificantEvent>
         </div>
+        <Footer></Footer>
+        </div> 
     );
 }

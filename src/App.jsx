@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';  
 import InteractiveMap from './InteractiveMap.jsx'
+import Footer from './Footer.jsx';
 
 function App() {
   const [disasters, setDisasters] = useState([]);
@@ -42,6 +43,7 @@ function App() {
   return (
     <>
       <InteractiveMap disasterData={final_disasters}/>
+      {/**<Footer></Footer>*/}
     </>   
   )
 }
